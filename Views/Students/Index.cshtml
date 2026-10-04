@@ -1,0 +1,8 @@
+@model IEnumerable<StudentManagementMVC.Models.Student>
+@{ViewData["Title"]="Quản lý sinh viên";}
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1>Quản lý sinh viên</h1><p class="text-muted">ASP.NET Core MVC + EF Core Code First + SQL Server</p></div><a asp-action="Create" class="btn btn-primary">+ Thêm sinh viên</a></div>
+@if(TempData["Success"]!=null){<div class="alert alert-success">@TempData["Success"]</div>}
+<form asp-action="Index" method="get" class="row g-2 mb-3"><div class="col-md-5"><input name="searchString" value="@ViewBag.SearchString" class="form-control" placeholder="Tìm theo mã hoặc họ tên..."></div><div class="col-auto"><button class="btn btn-outline-primary">Tìm kiếm</button></div><div class="col-auto"><a asp-action="Index" class="btn btn-outline-secondary">Xóa tìm kiếm</a></div></form>
+<div class="table-responsive"><table class="table table-bordered table-hover align-middle"><thead class="table-dark"><tr><th>Mã SV</th><th>Họ tên</th><th>Email</th><th>Giới tính</th><th>Ngày sinh</th><th>Chuyên ngành</th><th>GPA</th><th>Chức năng</th></tr></thead><tbody>
+@foreach(var item in Model){<tr><td>@item.StudentCode</td><td>@item.FullName</td><td>@item.Email</td><td>@item.Gender</td><td>@item.DateOfBirth?.ToString("dd/MM/yyyy")</td><td>@item.Major</td><td><b>@item.GPA.ToString("0.00")</b></td><td><a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Xem</a> <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a> <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a></td></tr>}
+@if(!Model.Any()){<tr><td colspan="8" class="text-center">Không có dữ liệu.</td></tr>}</tbody></table></div>

@@ -1,0 +1,2 @@
+@model StudentManagementMVC.Models.Student
+@{ViewData["Title"]="Xóa sinh viên";}<h1>Xóa sinh viên</h1><div class="alert alert-danger">Bạn có chắc muốn xóa <strong>@Model.FullName</strong> (@Model.StudentCode)?</div><form asp-action="Delete" method="post"><input type="hidden" asp-for="Id"><button class="btn btn-danger">Xác nhận xóa</button> <a asp-action="Index" class="btn btn-secondary">Hủy</a></form>
